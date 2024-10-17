@@ -14,3 +14,4 @@ __pycache__/
 .DS_Store
 .vscode/
 .idea/
+website/__pycache__/models.cpython-311.pyc
