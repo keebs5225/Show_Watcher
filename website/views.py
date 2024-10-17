@@ -1,37 +1,53 @@
-from flask import Blueprint, render_template, request, flash, jsonify
+from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
-from .models import Habit
+from .models import Show, WatchList
 from . import db
-import json
 
 views = Blueprint('views', __name__)
 
-
-@views.route('/', methods=['GET', 'POST'])
+@views.route('/')
 @login_required
 def home():
-    if request.method == 'POST': 
-        habit = request.form.get('habit')#Gets the habit from the HTML 
+    # Retrieve the current user's watchlist
+    watchlist = WatchList.query.filter_by(user_id=current_user.id).all()
+    return render_template('home.html', user=current_user, watchlist=watchlist)
 
-        if len(habit) < 1:
-            flash('Habit name is too short!', category='error') 
-        else:
-            new_habit = Habit(data=habit, user_id=current_user.id)  #providing the schema for the habit 
-            db.session.add(new_habit) #adding the habit to the database 
-            db.session.commit()
-            flash('Habit added!', category='success')
+@views.route('/add-show', methods=['POST'])
+@login_required
+def add_show():
+    title = request.form.get('title')
+    genre = request.form.get('genre')
+    release_year = request.form.get('release_year')
 
-    return render_template("home.html", user=current_user)
+    if not title or not genre or not release_year:
+        flash('Please fill in all fields', 'error')
+    else:
+        # Add new show and watchlist entry
+        new_show = Show(title=title, genre=genre, release_year=release_year)
+        db.session.add(new_show)
+        db.session.commit()
 
+        new_watchlist = WatchList(user_id=current_user.id, show_id=new_show.id, status='Planned')
+        db.session.add(new_watchlist)
+        db.session.commit()
 
-@views.route('/delete-habit', methods=['POST'])
-def delete_habit():  
-    habit = json.loads(request.data) # this function expects a JSON from the INDEX.js file 
-    habitId = habit['habitId']
-    habit = Habit.query.get(habitId)
-    if habit:
-        if habit.user_id == current_user.id:
-            db.session.delete(habit)
-            db.session.commit()
+        flash('Show added to your watchlist!', 'success')
 
-    return jsonify({})
+    return redirect(url_for('views.home'))
+
+@views.route('/update-watchlist/<int:id>', methods=['POST'])
+@login_required
+def update_watchlist(id):
+    watchlist_item = WatchList.query.get_or_404(id)
+    watchlist_item.status = request.form.get('status', watchlist_item.status)
+
+    db.session.commit()
+    return redirect(url_for('views.home'))
+
+@views.route('/delete-watchlist/<int:id>', methods=['POST'])
+@login_required
+def delete_watchlist(id):
+    watchlist_item = WatchList.query.get_or_404(id)
+    db.session.delete(watchlist_item)
+    db.session.commit()
+    return redirect(url_for('views.home'))
