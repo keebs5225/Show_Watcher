@@ -1,0 +1,16 @@
+# Ignore database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Ignore environment variables file
+.env
+
+# Ignore other potential sensitive files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.DS_Store
+.vscode/
+.idea/
