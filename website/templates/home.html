@@ -15,8 +15,8 @@
           </button>
         </form>
         <form action="/update-watchlist/{{ item.id }}" method="POST" class="inline-form">
-          <label for="status-{{ item.id }}" class="sr-only">Update Status</label> <!-- Added label for accessibility -->
-          <select name="status" id="status-{{ item.id }}" title="Update Watch Status"> <!-- Added title attribute for accessibility -->
+          <label for="status_{{ item.id }}" class="sr-only">Status</label>
+          <select name="status" id="status_{{ item.id }}" title="Update watch status">
             <option value="Watching" {% if item.status == 'Watching' %}selected{% endif %}>Watching</option>
             <option value="Watched" {% if item.status == 'Watched' %}selected{% endif %}>Watched</option>
             <option value="Planned" {% if item.status == 'Planned' %}selected{% endif %}>Planned</option>
@@ -47,4 +47,15 @@
     <input type="number" name="release_year" id="release_year" class="form-control" min="1900" max="{{ current_year }}" placeholder="Enter or select year">
 
     <label for="rating">Rate the Show (1 to 10):</label>
-    <input type="range" name="rating" id="rating" class="form-range" min="1" max="10" step="1" value="5" oninput="this.nextElementSibling
+    <input type="range" name="rating" id="rating" class="form-range" min="1" max="10" step="1" value="5" oninput="this.nextElementSibling.value = this.value">
+    <output>5</output>
+
+    <label for="description">Description (optional):</label>
+    <textarea name="description" id="description" class="form-control" rows="3" placeholder="Write a short description..."></textarea>
+
+    <br />
+    <div align="center">
+      <button type="submit" class="btn btn-primary">Add Show</button>
+    </div>
+  </form>
+{% endblock %}
