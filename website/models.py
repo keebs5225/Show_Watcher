@@ -13,6 +13,8 @@ class Show(db.Model):
     title = db.Column(db.String(150), nullable=False)
     genre = db.Column(db.String(50), nullable=False)
     release_year = db.Column(db.Integer, nullable=False)
+    rating = db.Column(db.Float, nullable=True)
+    description = db.Column(db.Text, nullable=True)
     watchlist = db.relationship('WatchList', backref='show', lazy=True)
 
 class WatchList(db.Model):

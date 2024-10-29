@@ -1,0 +1,157 @@
+/* Basic Reset */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 0;
+}
+
+/* Profile Section */
+.profile {
+    margin-top: 50px;
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+h2 {
+    color: #333;
+}
+
+/* Read More Button */
+.read-more-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Projects Section */
+.projects {
+    margin-top: 50px;
+}
+
+.project-list {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.project-item {
+    width: 200px;
+    text-align: center;
+}
+
+.project-item img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Social Media Section */
+.social {
+    margin-top: 50px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Social Icons Styling */
+.social-icons a {
+    margin: 0 10px;
+    font-size: 2.5rem; /* Adjust the size here */
+    color: black;      /* Set icon color to black */
+    text-decoration: none;
+}
+
+.social-icons a:hover {
+    color: #333; /* Optional hover effect */
+}
+
+/* Styling for Toggle Button */
+.toggle-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.toggle-btn:hover {
+    background-color: #5c5c5c;
+}
+
+/* Hide social section when JavaScript toggles it */
+.hidden {
+    display: none;
+}
+
+/* Screen Reader Only */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* Watchlist Styling */
+#watchlist {
+    list-style-type: none;
+    padding: 0;
+}
+
+#watchlist li {
+    position: relative;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 0;
+    transition: background-color 0.3s;
+}
+
+#watchlist li:hover {
+    background-color: #f0f0f0;
+}
+
+/* Show Details Styling */
+.show-details {
+    display: none; /* Hide details by default */
+}
+
+#watchlist li:hover .show-details {
+    display: block; /* Show details on hover */
+    background-color: #f8f9fa; /* Optional: add background color */
+    padding: 10px;
+    border-radius: 5px; /* Optional: add some rounding */
+}
+
+/* Context Menu Styling */
+.context-menu {
+    display: none; /* Hide context menu by default */
+}
+
+#watchlist li:hover .context-menu {
+    display: block; /* Show context menu on hover */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}

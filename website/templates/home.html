@@ -6,14 +6,13 @@
 
   <ul class="list-group list-group-flush" id="watchlist">
     {% for item in watchlist %}
-      <li class="list-group-item">
-        <strong>{{ item.show.title }}</strong> ({{ item.show.genre }}, {{ item.show.release_year }})
+      <li class="list-group-item" data-show-id="{{ item.show.id }}">
+        <!-- Show Title, Genre, and Release Year -->
+        <strong>{{ item.show.title }}</strong> 
+        ({{ item.show.genre }}, {{ item.show.release_year }})
+
+        <!-- Status Form -->
         - Status: {{ item.status }}
-        <form action="/delete-watchlist/{{ item.id }}" method="POST" class="inline-form">
-          <button type="submit" class="close" title="Remove from Watchlist">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </form>
         <form action="/update-watchlist/{{ item.id }}" method="POST" class="inline-form">
           <label for="status_{{ item.id }}" class="sr-only">Status</label>
           <select name="status" id="status_{{ item.id }}" title="Update watch status">
@@ -22,6 +21,28 @@
             <option value="Planned" {% if item.status == 'Planned' %}selected{% endif %}>Planned</option>
           </select>
           <button type="submit" class="btn btn-sm btn-primary">Update</button>
+        </form>
+
+        <!-- Right-click context menu for editing -->
+        <div class="context-menu" id="context-menu-{{ item.show.id }}">
+          <a href="{{ url_for('views.edit_show', show_id=item.show.id) }}" class="btn btn-sm btn-secondary">Edit</a>
+        </div>
+
+        <!-- Show Details: Rating and Description (on hover) -->
+        <div class="show-details">
+          {% if item.show.rating %}
+            Rating: {{ item.show.rating }}/10
+          {% endif %}
+          {% if item.show.description %}
+            <p>{{ item.show.description }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Remove from Watchlist Form -->
+        <form action="/delete-watchlist/{{ item.id }}" method="POST" class="inline-form">
+          <button type="submit" class="close" title="Remove from Watchlist">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </form>
       </li>
     {% endfor %}
@@ -58,4 +79,8 @@
       <button type="submit" class="btn btn-primary">Add Show</button>
     </div>
   </form>
+{% endblock %}
+
+{% block javascript %}
+<script src="{{ url_for('static', filename='index.js') }}"></script>
 {% endblock %}

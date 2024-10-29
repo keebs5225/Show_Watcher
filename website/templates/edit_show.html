@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Edit Show{% endblock %}
+
+{% block content %}
+<h1>Edit Show</h1>
+
+<form method="POST" action="{{ url_for('views.edit_show', show_id=show.id) }}">
+    <label for="title">Title:</label>
+    <input type="text" name="title" id="title" value="{{ show.title }}" required>
+
+    <label for="genre">Genre:</label>
+    <select name="genre" id="genre" title="Select the genre of the show">
+        <option value="Action" {% if show.genre == 'Action' %}selected{% endif %}>Action</option>
+        <option value="Comedy" {% if show.genre == 'Comedy' %}selected{% endif %}>Comedy</option>
+        <option value="Drama" {% if show.genre == 'Drama' %}selected{% endif %}>Drama</option>
+        <option value="Fantasy" {% if show.genre == 'Fantasy' %}selected{% endif %}>Fantasy</option>
+        <option value="Horror" {% if show.genre == 'Horror' %}selected{% endif %}>Horror</option>
+        <option value="Romance" {% if show.genre == 'Romance' %}selected{% endif %}>Romance</option>
+        <option value="Sci-Fi" {% if show.genre == 'Sci-Fi' %}selected{% endif %}>Sci-Fi</option>
+    </select>
+
+    <label for="release_year">Release Year:</label>
+    <input type="number" name="release_year" id="release_year" value="{{ show.release_year }}" min="1900" max="{{ current_year }}">
+
+    <label for="rating">Rate the Show (1 to 10):</label>
+    <input type="range" name="rating" id="rating" value="{{ show.rating }}" min="1" max="10" step="1" oninput="this.nextElementSibling.value = this.value">
+    <output>{{ show.rating }}</output>
+
+    <label for="description">Description (optional):</label>
+    <textarea name="description" id="description" rows="3" placeholder="Write a short description...">{{ show.description }}</textarea>
+
+    <br />
+    <button type="submit" class="btn btn-primary">Update Show</button>
+</form>
+{% endblock %}
