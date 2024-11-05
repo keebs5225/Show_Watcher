@@ -6,7 +6,8 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f4f4f4;
+    background-color: #121212; /* Dark background */
+    color: #f0e4e4; /* Light text color */
     margin: 0;
 }
 
@@ -22,12 +23,12 @@ body {
 }
 
 h2 {
-    color: #333;
+    color: #ffffff; /* Light color for headings */
 }
 
 /* Read More Button */
 .read-more-btn {
-    background-color: #4CAF50;
+    background-color: #4CAF50; /* Keep button color */
     color: white;
     padding: 10px 20px;
     border: none;
@@ -72,19 +73,19 @@ h2 {
 .social-icons a {
     margin: 0 10px;
     font-size: 2.5rem; /* Adjust the size here */
-    color: black;      /* Set icon color to black */
+    color: #e0e0e0;    /* Light color for icons */
     text-decoration: none;
 }
 
 .social-icons a:hover {
-    color: #333; /* Optional hover effect */
+    color: #ffffff; /* Light color on hover */
 }
 
 /* Styling for Toggle Button */
 .toggle-btn {
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #000000;
+    background-color: #333333; /* Darker background for button */
     color: white;
     border: none;
     cursor: pointer;
@@ -121,15 +122,15 @@ h2 {
 #watchlist li {
     position: relative;
     padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ccc;
+    background-color: #1e1e1e; /* Dark background for list items */
+    border: 1px solid #444; /* Dark border */
     border-radius: 5px;
     margin: 10px 0;
     transition: background-color 0.3s;
 }
 
 #watchlist li:hover {
-    background-color: #f0f0f0;
+    background-color: #292929; /* Lighter background on hover */
 }
 
 /* Show Details Styling */
@@ -139,7 +140,7 @@ h2 {
 
 #watchlist li:hover .show-details {
     display: block; /* Show details on hover */
-    background-color: #f8f9fa; /* Optional: add background color */
+    background-color: #2c2c2c; /* Optional: add background color */
     padding: 10px;
     border-radius: 5px; /* Optional: add some rounding */
 }
@@ -154,4 +155,19 @@ h2 {
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+/* Delete X Button */
+.delete-btn {
+    color: #888; /* Light grey for the delete 'X' */
+    font-size: 1.5rem;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    transition: color 0.3s;
+}
+
+.delete-btn:hover {
+    color: #bbb; /* Lighter grey on hover */
 }
